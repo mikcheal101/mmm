@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/tether-theme-arrows-dark.css">
+    <link rel="stylesheet" href="/styles/tether-theme-arrows-dark.min.css">
+    <link rel="stylesheet" href="/styles/tether-theme-arrows.css">
+    <link rel="stylesheet" href="/styles/tether-theme-arrows.min.css">
+    <link rel="stylesheet" href="/styles/tether-theme-basic.css">
+    <link rel="stylesheet" href="/styles/tether-theme-basic.min.css">
+    <link rel="stylesheet" href="/styles/tether.css">
+    <link rel="stylesheet" href="/styles/tether.min.css">
+    <!--STYLES END-->
+  </head>
+
+  <body>
+    <%- body %>
+
+
+
+    <!--
+        Client-side Templates
+        ========================
+
+        HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/templates` folder, then
+        include them here automatically (between TEMPLATES and TEMPLATES END).
+
+        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your client-side templates using a server-side
+              stringfile before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    <script type="text/javascript" src="/jst.js"></script>
+    <!--TEMPLATES END-->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+      By default, files in your `assets/js` folder are included here
+      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+      and concatenated into a single file.
+
+      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+      For example, here are a few things you could do:
+
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/dependencies/tether.min.js"></script>
+    <script src="/js/dependencies/jquery.min.js"></script>
+    <script src="/js/dependencies/bootstrap.min.js"></script>
+    <script src="/js/dependencies/angular.min.js"></script>
+    <script src="/js/dependencies/angular-route.min.js"></script>
+    <script src="/angular/node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+    <script src="/angular/node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+    <script src="/angular/node_modules/angular-middleware/dist/angular-middleware.min.js"></script>
+    <script src="/angular/node_modules/angular-utils-pagination/dirPagination.js"></script>
+    <script src="/angular/app/main.js"></script>
+    <script src="/angular/app/services/AuthService.js"></script>
+    <script src="/angular/app/services/SessionService.js"></script>
+    <script src="/angular/app/services/UserService.js"></script>
+    <script src="/angular/app/directives/AuthDirective.js"></script>
+    <script src="/angular/app/directives/Sidebar.js"></script>
+    <script src="/angular/app/controllers/AccountController.js"></script>
+    <script src="/angular/app/controllers/AuthController.js"></script>
+    <script src="/angular/app/controllers/BankingController.js"></script>
+    <script src="/angular/app/controllers/CustomerController.js"></script>
+    <script src="/angular/app/controllers/PackageController.js"></script>
+    <script src="/angular/app/controllers/PaymentController.js"></script>
+    <script src="/angular/app/controllers/UserController.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>

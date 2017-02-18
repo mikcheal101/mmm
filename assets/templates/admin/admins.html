@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <!-- TODO: insert side panel -->
+        </div>
+        <div class="col-md-8 offset-md-1">
+            <!-- TODO: display a list of admins on the system excluding the super administrator -->
+            <div class="card">
+                <div class="card-block">
+                    <div class="card-title text-center">Administrator(s) Listing</div>
+                    <a href="/admin/profile/admin" class="btn btn-sm btn-outline-info mb-3 text-uppercase">create admin</a>
+
+                    <table class="table table-striped" ng-init="loadAdmins();">
+                        <thead>
+                            <th width="10%">#</th>
+                            <th>Admin Username</th>
+                            <th width="25%">Customer Account(s)</th>
+                            <th width="5%"> <i class="glyphicon glyphicon-cogs"></i> </th>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="x in packages | itemsPerPage: 20">
+                                <td>1</td>
+                                <td> <a href="/admin/profile/admin/{{x.id}}">admin username</a> </td>
+                                <td>10</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-info">
+                                        <i class="glyphicon glyphicon-trash" ng-click="deleteAdmin(x);"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

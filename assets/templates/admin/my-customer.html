@@ -1,0 +1,186 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <!-- TODO: insert side panel -->
+        </div>
+        <div class="col-md-10">
+            <!-- TODO: display a form to craete a customer for the admin -->
+            <div class="card" ng-show="admin.selected.id">
+                <div class="card-block">
+                    <div class="card-title text-center">Enter Customer Detail(s) To Update</div>
+                    <div class="card-subtitle pb-2 text-danger text-center" ng-if="error">
+                        <span class="small" ng-bind="error" ></span>
+                    </div>
+                    <hr class="py-2 my-1">
+                    <form name="formUpdate" novalidate>
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" ng-model="data.name" name="name"  class="form-control" placeholder="Enter your Full Name" pattern="" required="required">
+                            <span class="error" ng-if="form.name.$invalid"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address:</label>
+                            <input type="email" ng-model="data.email" class="form-control" placeholder="Enter your Email Address" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Number:</label>
+                            <input type="text" ng-model="data.mobile" class="form-control" placeholder="Enter your Mobile Number eg:090XXXXXX or 08XXXXXXX" pattern="" required="required">
+                        </div>
+
+                        <hr class="py-2">
+                        <div class="form-group">
+                            <label>Username:</label>
+                            <input type="text"ng-minlength="8" ng-model="data.username" class="form-control" placeholder="Enter your Choosen Username" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" ng-minlength="8" ng-model="data.password" class="form-control" name="password" placeholder="Enter Password" pattern="" required="required"x>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Confirm Password:
+                                <small class="text-danger" ng-show="(formUpdate.password.$touched && formUpdate.password2.$touched) &&
+                                    (formUpdate.password.$modelValue !== formUpdate.password2.$modelValue)">
+                                    Passwords do not match!
+                                </small>
+                            </label>
+                            <input type="password" ng-model="data.confirmpassword" class="form-control" name="password2" placeholder="Re enter Password" pattern="" required="required"
+                                ng-pattern="form.password.$modelValue">
+                        </div>
+
+                        <hr class="py-2">
+                        <div class="form-group">
+                            <label for="">Bank Name:</label>
+                            <select name="bank" class="form-control">
+                                <option>Eco Bank</option>
+                                <option>Access Bank</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Account Type:</label>
+                            <select name="bank" class="form-control">
+                                <option>Savings Account</option>
+                                <option>Current Account</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Account Name:</label>
+                            <input name="" class="form-control" placeholder="Enter Account Name" pattern="" required="" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">Account Number:</label>
+                            <input name="" class="form-control" placeholder="Enter Account Number" pattern="" required="" >
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn btn-outline-primary btn-sm" ng-show="formUpdate.$valid" type="submit" ng-click="saveCustomer(data);">
+                                Save!
+                            </button>
+
+                            <div class="text-right">
+                                <div class="btn-group" role="group" ng-show="formUpdate.$valid">
+                                    <button class="btn btn-outline-primary btn-sm" type="submit" ng-click="updateCustomer();">
+                                        Update!
+                                    </button>
+                                    <button class="btn btn-outline-primary btn-sm" type="submit" ng-click="deleteCustomer(data);">
+                                        Delete!
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Create Customer -->
+            <div class="card" ng-hide="admin.selected.id">
+                <div class="card-block">
+                    <div class="card-title text-center">Enter Customer Detail(s) To Save</div>
+                    <div class="card-subtitle pb-2 text-danger text-center" ng-if="error">
+                        <span class="small" ng-bind="error" ></span>
+                    </div>
+                    <hr class="py-2 my-1">
+                    <form name="formCreate" novalidate>
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" ng-model="data.name" name="name"  class="form-control" placeholder="Enter your Full Name" pattern="" required="required">
+                            <span class="error" ng-if="form.name.$invalid"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address:</label>
+                            <input type="email" ng-model="data.email" class="form-control" placeholder="Enter your Email Address" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Number:</label>
+                            <input type="text" ng-model="data.mobile" class="form-control" placeholder="Enter your Mobile Number eg:090XXXXXX or 08XXXXXXX" pattern="" required="required">
+                        </div>
+
+                        <hr class="py-2">
+                        <div class="form-group">
+                            <label>Username:</label>
+                            <input type="text"ng-minlength="8" ng-model="data.username" class="form-control" placeholder="Enter your Choosen Username" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" ng-minlength="8" ng-model="data.password" class="form-control" name="password" placeholder="Enter Password" pattern="" required="required"x>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Confirm Password:
+                                <small class="text-danger" ng-show="(formCreate.password.$touched && formCreate.password2.$touched) &&
+                                    (formCreate.password.$modelValue !== formCreate.password2.$modelValue)">
+                                    Passwords do not match!
+                                </small>
+                            </label>
+                            <input type="password" ng-model="data.confirmpassword" class="form-control" name="password2" placeholder="Re enter Password" pattern="" required="required"
+                                ng-pattern="form.password.$modelValue">
+                        </div>
+
+                        <hr class="py-2">
+                        <div class="form-group">
+                            <label for="">Bank Name:</label>
+                            <select name="bank" class="form-control">
+                                <option>Eco Bank</option>
+                                <option>Access Bank</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Account Type:</label>
+                            <select name="bank" class="form-control">
+                                <option>Savings Account</option>
+                                <option>Current Account</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Account Name:</label>
+                            <input name="" class="form-control" placeholder="Enter Account Name" pattern="" required="" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">Account Number:</label>
+                            <input name="" class="form-control" placeholder="Enter Account Number" pattern="" required="" >
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn btn-outline-primary btn-sm" ng-show="formCreate.$valid" type="submit" ng-click="saveCustomer(data);">
+                                Save!
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

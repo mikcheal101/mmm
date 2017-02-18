@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <div class="card">
+                <div class="card-block">
+                    <div class="card-title text-center">Make Payment</div>
+                    <div class="card-subtitle pb-2 text-muted text-center">
+                        [<b>2</b> hour(s) <b>3</b> Miniute(s) <b>10</b> Second(s) left to make the deposit]
+                    </div>
+
+                    <table class="table col-sm-12 mt-3">
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Account Name:
+                            </th>
+                            <td>
+                                <code>Sample Name</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Bank Name:
+                            </th>
+                            <td>
+                                <code>Sample Name</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Account Type:
+                            </th>
+                            <td>
+                                <code>Sample Name</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Account Number:
+                            </th>
+                            <td>
+                                <code>Sample Name</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Payer Mobile Number:
+                            </th>
+                            <td>
+                                <code>Sample Name</code>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="text-center">
+                        <p>I have made the payment</p>
+                        <small class="text-info">Please, ensure your scanned payment copy is in <b><u>jpg or jpeg or png</u></b> format</small>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button class="btn btn-outline-primary btn-sm" ngf-select ng-model="d.file" name="file" ngf-pattern="'image/*'"
+                            ngf-accept="'image/*'" ngf-max-size="2MB">
+                            Upload Payment Copy
+                            <i class="glyphicon glyphicon-upload"></i>
+                        </button>
+                    </div>
+
+                    <div ngf-drop ng-model="d.file" name="file" ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'" ngf-max-size="2MB">
+                        <image ngf-thumbnail="file" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <!-- TODO: insert side panel -->
+            <div class="bootstrap-vertical-nav">
+
+                <button class="btn btn-primary hidden-md-up" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <span class="">Menu</span>
+                </button>
+
+                <div class="collapse" id="collapseExample">
+                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Disabled</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-8 offset-md-1">
+            <!-- TODO: display a list of transactions on the system -->
+            <div class="card">
+                <div class="card-block">
+                    <div class="card-title text-center">Transactions</div>
+
+                    <table class="table table-striped" ng-init="loadPayments();">
+                        <thead>
+                            <th width="10%">#</th>
+                            <th>Payee</th>
+                            <th>Payer</th>
+                            <th>Package</th>
+                            <th>Date</th>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="x in banks | itemsPerPage: 20">
+                                <td>1</td>
+                                <td> <span ng-click="showCustomer();">payee ref code</span> </td>
+                                <td> <span ng-click="showCustomer();">payer ref code</span> </td>
+                                <td> package </td>
+                                <td>
+                                    21st January 2017
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
