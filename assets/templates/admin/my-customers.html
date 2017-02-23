@@ -1,16 +1,48 @@
+<admin-header user="session"></admin-header>
 <div class="container-fluid">
+    <div class="row" ng-show="admin.selected.name">
+
+        <hr>
+    </div>
     <div class="row">
-        <div class="col-md-2">
-            <!-- TODO: insert side panel -->
+
+        <div ng-class="admin.selected.name ? 'col-md-4':'hidden-sm-up'">
+            <div class="card mb-3">
+                <div class="card-block">
+                    <div class="card-title mb-1 pb-1" ng-bind="admin.selected.name"></div>
+                    <small class="card-text mb-3 pb-3" ng-bind="admin.selected.username"></small>
+                    <table class="table mt-3 pt-3">
+                        <tr>
+                            <th width="70%">Account Name:</th>
+                            <td> <span ng-bind="admin.selected.account.name"></span> </td>
+                        </tr>
+                        <tr>
+                            <th>Account Bank:</th>
+                            <td> <span ng-bind="admin.selected.account.bank.name"></span> </td>
+                        </tr>
+                        <tr>
+                            <th>Account Number:</th>
+                            <td> <span ng-bind="admin.selected.account.number"></span> </td>
+                        </tr>
+                        <tr>
+                            <th>Account Type:</th>
+                            <td> <span ng-bind="admin.selected.account.account_type"></span> </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="col-md-10">
+
+        <div ng-class="admin.selected.name ? 'col-md-8':'col-md-10 offset-1'">
             <!-- TODO: display a list of my customers on the system -->
-            <div class="card">
+            <div class="card" ng-init="admin.loadMyCustomers();">
                 <div class="card-block">
                     <div class="card-title text-center">My Customers Listing</div>
                     <a href="/admin/profile/my/customer" class="text-uppercase mb-3 btn btn-sm btn-outline-primary">create customer account</a>
-
-                    <table class="table table-striped" ng-init="admin.loadMyCustomers();">
+                    <div class="form-group">
+                        <input type="text" ng-model="search"  class="form-control" placeholder="Search for customer">
+                    </div>
+                    <table class="table table-striped" >
                         <thead>
                             <th>reference code</th>
                             <th>email address</th>
@@ -19,14 +51,15 @@
                             <th> <i class="glyphicon glyphicon-cogs"></i> </th>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="x in admin.my_customers | itemsPerPage: 20">
-                                <td> <a href="/admin/profile/customer/{{x.id}}">reference code</a> </td>
-                                <td>sample@mail.com</td>
-                                <td>username</td>
-                                <td>21st January 2017</td>
+                            <tr dir-paginate="customer in admin.my_customers | filter:search | itemsPerPage: 20">
+                                <!--<td> <a ng-href="/admin/profile/customer/{{ customer.id }}" ng-click="setSelected(customer);" > {{ customer.referencecode }} </a> </td> -->
+                                <td> <span class="btn btn-link" ng-click="setBank(customer);">{{ customer.referencecode }}</span> </td>
+                                <td>{{ customer.email }}</td>
+                                <td>{{ customer.username }}</td>
+                                <td>{{ customer.createdAt | date:'dd mm, yy'}}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-info">
-                                        <i class="glyphicon glyphicon-trash" ng-click="admin.deleteCustomer(x);"></i>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fa fa-trash-o" ng-click="admin.deleteCustomer(customer);"></i>
                                     </button>
                                 </td>
                             </tr>

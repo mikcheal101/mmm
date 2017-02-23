@@ -51,6 +51,8 @@ module.exports.routes = {
     'post   /authentication/confirm'        : 'Auth.confirm',               /// confirm account from email with confirmation code
     'get    /authentication/session'        : 'Auth.session',               /// get the session attribute
     'get    /authentication/logout'         : 'Auth.logout',                /// url to logout of the system
+    'get    /authentication/signout'        : 'Auth.signOut',               /// url to logout of the system without a redirection
+
 
     'post   /profile/packages'              : 'Customer.package',           /// post package to register for
     'post   /profile/commit'                : 'Customer.commit',            /// commit payment
@@ -68,22 +70,32 @@ module.exports.routes = {
 
     'get    /banking/bank'                  : 'Banking',                    //// list all the banks
     'get    /banking/account/type'          : 'Account.type',               //// list all the bank account types
-    'get    /package'                       : 'Package',                    //// list all the pakages
-    'get    /customers'                     : 'Customer',                   //// list all the customers on the system
-    'get    /payments'                      : 'Payment',                    //// list all the payments made
+    'get    /package'                       : 'Package.index',              //// list all the packages
+    'get    /customers'                     : 'Customer.index',             //// list all the customers on the system
+    'get    /customers/my'                  : 'Customer.mine',              //// list all the customers registered by me
+    'get    /payments'                      : 'Payment.index',              //// list all the payments made
+    'get    /web-admin'                     : 'WebAdmin.index',             //// list all the webadmins
+    'get    /banking/bank/:id'              : 'Banking.getBank',            //// get a single bank
 
     'post   /banking/bank'                  : 'Banking',                    //// save a bank
     'post   /banking/account/type'          : 'Account.type',               //// save bank account types
     'post   /package'                       : 'Package.create',             //// create package
+    'post   /web-admin'                     : 'WebAdmin.create',            //// create webadmin
+    'post   /customers/my'                  : 'Customer.create',            //// create customer
 
     'put    /banking/bank/:id'              : 'Banking.update',             //// update a bank details
     'put    /banking/account/type/:id'      : 'Account.type',               //// update an account type
     'put    /package/:id'                   : 'Package.update',             //// update a package
-    'put    /customers/:id'                 : 'Customer.suspend',           //// suspend a customer account
+    'put    /customers/suspend/:id'         : 'Customer.suspend',           //// suspend a customer account
+    'put    /customers/unsuspend/:id'       : 'Customer.unsuspend',         //// unsuspend a customer account
+    'put    /customers/my/:id'              : 'Customer.update',            //// update my customer account
+    'put    /web-admin/:id'                 : 'WebAdmin.update',            //// update web administrator from super administrator
 
     'delete /banking/bank/:id'              : 'Banking.delete',             //// delete a bank from the list
     'delete /banking/account/type/:id'      : 'Account.delete',             //// delete an account type
     'delete /package/:id'                   : 'Package.delete',             //// delete package
+    'delete /web-admin/:id'                 : 'WebAdmin.delete',            //// delete web administrator from super administrator
+    'delete /customers/my/:id'              : 'Customer.delete',            //// delete my customer account
 
     'get    /routing/management'            : 'Auth.superAdmin',            //// hidden url super admin
 

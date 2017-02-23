@@ -1,10 +1,9 @@
+<admin-header user="session"></admin-header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
-            <!-- TODO: insert side panel -->
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-10 offset-md-1">
             <!-- TODO: display a list of packages on the system -->
+
             <div class="card">
                 <div class="card-block">
                     <div class="card-title text-center">Packages Listing</div>
@@ -15,24 +14,21 @@
                             <th width="10%">#</th>
                             <th>Package Name</th>
                             <th width="25%">Package Amount (NGN)</th>
-                            <th width="5%"> <i class="glyphicon glyphicon-cogs"></i> </th>
+                            <th width="5%"> <i class="fa fa-cogs"></i> </th>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="x in packages | itemsPerPage: 20">
-                                <td>1</td>
-                                <td> <a href="/admin/profile/package/{{x.id}}">package name</a> </td>
-                                <td>3000.00</td>
+                            <tr ng-repeat="item in packages">
+                                <td>{{ $index + 1 }}</td>
+                                <td> <a ng-href="/admin/profile/package/{{ item.id }}" ng-click="setSelected(item);">{{ item.name }}</a> </td>
+                                <td>{{ item.amount }}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-info">
-                                        <i class="glyphicon glyphicon-trash" ng-click="delete(x);"></i>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fa fa-trash-o" ng-click="delete(item);"></i>
                                     </button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="text-center">
-                        <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
-                    </div>
                 </div>
             </div>
         </div>

@@ -18,6 +18,7 @@
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
   'styles/**/*.css',
+  '/angular/node_modules/angular-flip-clock/dist/angular-flip-clock.css',
 ];
 
 
@@ -34,6 +35,9 @@ var jsFilesToInject = [
   '/js/dependencies/bootstrap.min.js',
   '/js/dependencies/angular.min.js',
   '/js/dependencies/angular-route.min.js',
+  '/angular/node_modules/angular-flip-clock/dist/angular-flip-clock.full.js',
+  '/angular/node_modules/moment/moment.js',
+  '/angular/node_modules/angular-moment/angular-moment.min.js',
   '/angular/node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js',
   '/angular/node_modules/ng-file-upload/dist/ng-file-upload.min.js',
   '/angular/node_modules/angular-middleware/dist/angular-middleware.min.js',

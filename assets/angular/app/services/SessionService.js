@@ -21,6 +21,18 @@ var SessionService = app.service('SessionService', ['$http', '$q', 'Upload', fun
         });
         return defer.promise;
     };
-
+    svc.logout      = function(){
+        var defer   = $q.defer();
+        $http.get('/authentication/signout')
+            .then(response => {
+                console.log('response: ', response);
+                defer.resolve(response.data);
+            })
+            .catch(err => {
+                console.error(err);
+                defer.reject(err);
+            });
+        return defer.promise;
+    };
     return svc;
 }]);

@@ -1,9 +1,7 @@
+<admin-header user="session"></admin-header>
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
-            <!-- TODO: insert side panel -->
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-10 offset-md-1">
             <!-- TODO: display a form with the bank details to save, delete, update -->
             <div class="card" ng-hide="selected.id">
                 <div class="card-block">
@@ -28,7 +26,7 @@
             </div>
 
             <!-- update bank -->
-            <div class="card" ng-show="selected.id">
+            <div class="card" ng-show="selected.id" ng-init="getSelected();">
                 <div class="card-block">
                     <div class="card-title text-center">Update Bank Detail(s)</div>
                     <div class="card-subtitle pb-2 text-danger text-center" ng-if="error">

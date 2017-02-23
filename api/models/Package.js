@@ -5,6 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
+
 module.exports = {
 
     attributes: {
@@ -13,7 +14,7 @@ module.exports = {
             required:true
         },
         amount:{
-            type:'number',
+            type:'string',
             required:true
         },
         userpackage:{
@@ -21,45 +22,59 @@ module.exports = {
         }
     },
 
-    get:function(opts, cb){
-        Paackage
+    getPackages:function(opts, cb){
+        Package
             .find()
-            .populate('user')
+            .populate('userpackage')
             .then(function(d){
-                return d;
+                cb(false, d);
             })
             .catch(function(e){
-                return;
+                cb(e);
             });
     },
-    update:function(opts, where, cb){
+    getPackage:function(opts, cb){
         Package
-            .update(opts, where)
+            .findOne({id:opts})
+            .populate('userpackage')
             .then(function(d){
-                return d;
+                cb(false, d);
             })
             .catch(function(e){
-                return;
+                cb(e);
             });
     },
-    create:function(opts, cb){
+    updatePackage:function(opts, where, cb){
         Package
-            .create(opts)
+            .update(where, opts)
             .then(function(d){
-                return d;
+                cb(false, d);
             })
             .catch(function(e){
-                return;
+                cb(e);
             });
     },
-    delete:function(opts, cb){
+    savePackage:function(opts, cb){
         Package
-            .delete(opts)
+        .create({
+            name: opts.name,
+            amount: parseInt(opts.amount)
+        })
+        .then(function(d){
+            cb(false, d);
+        })
+        .catch(function(e){
+            cb(e);
+        });
+    },
+    deletePackage:function(opts, cb){
+        Package
+            .destroy({id:opts.id})
             .then(function(d){
-                return d;
+                cb(false, d);
             })
             .catch(function(e){
-                return;
+                cb(e);
             });
     }
 };

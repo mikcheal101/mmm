@@ -1,41 +1,50 @@
-<div class="container">
+<admin-header user="session"></admin-header>
+
+<div class="container-fluid" ng-init="setTimer();">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="my-3 py-3 mx-auto text-center" style="width:80%!important;">
+            <style>
+                .dy-flip-clock{
+                    margin-right: auto!important;
+                    margin-left: auto!important;
+                    width:50%!important;
+                }
+            </style>
+            <dy-flip-clock time="{{ timer }}"></dy-flip-clock>
+        </div>
+
+        <div class="col-sm-12 col-md-10 offset-md-1">
+            
             <div class="card">
                 <div class="card-block">
                     <div class="card-title text-center">Bank Account</div>
-                    <div class="card-subtitle mb-2 text-muted small text-center">
-                        [<b>2</b> hour(s) <b>3</b> Miniute(s) <b>10</b> Second(s) left to enter your banking details]
-                    </div>
                     <hr class="pb-2 pt-2">
                     <form name="form" novalidate>
-                        <div class="form-group">
+                        <div class="form-group" ng-init="customerLoadBanks();">
                             <label for="">Bank Name:</label>
-                            <select name="bank" class="form-control">
-                                <option>Eco Bank</option>
-                                <option>Access Bank</option>
+                            <select name="bank" class="form-control" ng-options="bank.id as bank.name for bank in banks track by bank.id" ng-model="account.bank" required="required">
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="">Account Type:</label>
-                            <select name="bank" class="form-control">
-                                <option>Savings Account</option>
-                                <option>Current Account</option>
+                            <select name="account_type" class="form-control" ng-model="account.account_type" required="required">
+                                <option>savings</option>
+                                <option>current</option>
                             </select>
                         </div>
                         <hr class="pb-2 pt-2">
                         <div class="form-group">
                             <label for="">Account Name:</label>
-                            <input name="" class="form-control" placeholder="Enter Account Name" pattern="" required="required" >
+                            <input name="" class="form-control" placeholder="Enter Account Name" ng-model="account.name" pattern="" required="required" >
                         </div>
                         <div class="form-group">
                             <label for="">Account Number:</label>
-                            <input name="" class="form-control" placeholder="Enter Account Number" ng-minLength="10" pattern="" required="required" >
+                            <input name="" class="form-control" placeholder="Enter Account Number" ng-model="account.number" ng-minLength="10" pattern="" required="required" >
                         </div>
                         <hr class="pb-2 pt-2">
                         <div class="form-group text-right" ng-show="form.$valid">
-                            <button type="submit" class="btn btn-outline-primary btn-sm" ng-click="account.save(details);">save account</button>
+                            <button type="submit" class="btn btn-outline-primary btn-sm" ng-click="save(account);">save account</button>
                         </div>
                     </form>
                 </div>

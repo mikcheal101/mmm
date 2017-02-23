@@ -1,13 +1,14 @@
+<admin-header user="session"></admin-header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
-            <!-- TODO: insert side panel -->
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-10 offset-md-1" ng-init="admin.loadCustomers();">
             <!-- TODO: display a list of customers on the system -->
             <div class="card">
                 <div class="card-block">
                     <div class="card-title text-center">Customers Listing</div>
+                    <div class="form-group">
+                        <input type="text" ng-model="search"  class="form-control" placeholder="Search for customer">
+                    </div>
 
                     <table class="table table-striped">
                         <thead>
@@ -17,15 +18,31 @@
                             <th>mobile #</th>
                             <th>Registration Date</th>
                             <th>Current Package</th>
+                            <th width="5%"> <i class="fa fa-cog"></i> </th>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="x in admin.customers | itemsPerPage: 20">
-                                <td>reference code</td>
-                                <td>sample@mail.com</td>
-                                <td>username</td>
-                                <td>090289474747</td>
-                                <td>21st January 2017</td>
-                                <td># 3000</td>
+                            <tr dir-paginate="customer in admin.customers | filter:search | itemsPerPage: 20">
+                                <td>{{ customer.referencecode }}</td>
+                                <td>{{ customer.email }}</td>
+                                <td>{{ customer.username }}</td>
+                                <td>{{ customer.mobile }}</td>
+                                <td>{{ customer.createdAt | date:'dd MMM, yyyy' }}</td>
+                                <td>
+                                    <span ng-show="customer.userpackage">
+                                        <span ng-bind="customer.userpackage.name"></span>
+                                    </span>
+                                    <span ng-hide="customer.userpackage">
+                                        <span class="text-danger">No Package selected</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-danger" ng-show="customer.userstatus !== 'suspended'" ng-click="suspendCustomer(customer);">
+                                        <i class="fa fa-times text-danger"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success" ng-show="customer.userstatus === 'suspended'" ng-click="unsuspendCustomer(customer);">
+                                        <i class="fa fa-check text-success"></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

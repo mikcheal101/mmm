@@ -1,5 +1,7 @@
+<admin-header user="session"></admin-header>
+
 <div class="container">
-    <div class="row">
+    <div class="row" ng-show="1 !== 1">
         <div class="col-sm-12">
             <!-- TODO: add the alert for a pending payment approval -->
             <div class="card my-3">
@@ -42,35 +44,59 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-12">
-            <hr class="my-3 py-3">
+        <div ng-class="1 === 1 ? 'col-md-10 offset-md-1':'col-md-12'">
+            <hr ng-class="1 !== 1 ? 'my-3 py-3':'py-1'">
             <h5 class="text-left">User Details:</h5>
             <table class="table">
                 <tr>
+                    <td class="text-left text-bold bold" width="30%">Reference Code:</td>
+                    <td>
+                        <h3 ng-bind="session.referencecode" class="text-info"></h3>
+                    </td>
+                </tr>
+                <tr>
                     <td class="text-left text-bold bold" width="30%">Full Name:</td>
                     <td>
-                        <code>sample name</code>
+                        <code ng-bind="session.name"></code>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-left text-bold bold">email address:</th>
                     <td>
-                        <code>sample@email.om</code>
+                        <code ng-bind="session.email"></code>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-left text-bold bold">Mobile Number:</th>
                     <td>
-                        <code></code>
+                        <code ng-bind="session.mobile"></code>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-left text-bold bold">Username:</th>
                     <td>
-                        <code></code>
+                        <code ng-bind="session.username"></code>
                     </td>
                 </tr>
             </table>
+
+            <hr>
+
+            <div class="text-center my-3 py-3" ng-hide="session.usertype === 'super-administrator' || session.usertype === 'administrator'">
+                <a href="/secure/profile/account" class="btn btn-outline-danger btn-md my-3">
+                    Add Account Details before <span ng-bind="session.timing | date:'EEEE hh : mm : ss dd MMM, yyyy'" ng-init="setTimer(session.timing);"></span>
+                </a>
+                <div class="my-3 py-3 text-center">
+                    <style>
+                        .dy-flip-clock{
+                            margin-right: auto!important;
+                            margin-left: auto!important;
+                            width:50%!important;
+                        }
+                    </style>
+                    <dy-flip-clock time="{{ timer }}"></dy-flip-clock>
+                </div>
+            </div>
         </div>
     </div>
 </div>

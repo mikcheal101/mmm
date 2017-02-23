@@ -1,9 +1,7 @@
+<admin-header user="session"></admin-header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
-            <!-- TODO: insert side panel -->
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-10 offset-md-1">
             <!-- TODO: display a list of banks on the system -->
             <div class="card">
                 <div class="card-block">
@@ -14,15 +12,15 @@
                         <thead>
                             <th width="10%">#</th>
                             <th>Bank Name</th>
-                            <th width="5%"> <i class="glyphicon glyphicon-cogs"></i> </th>
+                            <th width="5%"> <i class="fa fa-cogs"></i> </th>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="x in banks | itemsPerPage: 20">
-                                <td>1</td>
-                                <td> <a href="/admin/profile/bank/{{x.id}}">bank name</a> </td>
+                            <tr dir-paginate="bank in banks | itemsPerPage: 20">
+                                <td>{{ $index + 1 }}</td>
+                                <td> <a ng-href="/admin/profile/bank/{{ bank.id }}" ng-click="setSelected(bank);">{{ bank.name }}</a> </td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-info">
-                                        <i class="glyphicon glyphicon-trash" ng-click="delete(x);"></i>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fa fa-trash-o" ng-click="delete(bank);"></i>
                                     </button>
                                 </td>
                             </tr>

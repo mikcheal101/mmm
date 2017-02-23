@@ -1,10 +1,103 @@
+<admin-header user="session"></admin-header>
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
-            <!-- TODO: insert side panel -->
-        </div>
-        <div class="col-md-8 offset-md-1">
+        <div class="col-md-10 offset-md-1">
             <!-- TODO: display form containing the admin details with save, delete, update buttons  -->
+            <div class="card" ng-hide="selected_admin.id">
+                <div class="card-block">
+                    <div class="card-title text-center">Enter Web Admin Details</div>
+                    <div class="card-subtitle pb-2 text-danger text-center" ng-if="error">
+                        <span class="small" ng-bind="error" ></span>
+                    </div>
+                    <hr class="py-2 my-1">
+                    <form name="formCreate" novalidate>
+                        <div class="form-group">
+                            <label>FullName:</label>
+                            <input type="text" ng-model="data.name" class="form-control" placeholder="Enter Fullname eg. Eagle Eye" pattern="" required="required">
+                            <span class="error" ng-if="formCreate.name.$invalid">enter fullname</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address:</label>
+                            <input type="email" ng-model="data.email" class="form-control" placeholder="Enter email address eg. sample@mail.com" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tel Number:</label>
+                            <input type="text" ng-model="data.mobile" class="form-control" placeholder="EnterMobile Number. eg 0902 047 47474" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Username:</label>
+                            <input type="text" ng-model="data.username" class="form-control" placeholder="Enter Username eg. username" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" ng-model="data.password" class="form-control" placeholder="Enter Password" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm Password:</label>
+                            <input type="password" ng-model="data.pwd" class="form-control" placeholder="Re Enter Password" pattern="" required="required">
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn btn-outline-primary btn-sm" ng-show="formCreate.$valid" type="submit" ng-click="createAdmin(data);">
+                                Save Web Administrator!
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card" ng-show="selected_admin.id" ng-init="getSelectedAdmin();">
+                <div class="card-block">
+                    <div class="card-title text-center">Enter Web Admin Details</div>
+                    <div class="card-subtitle pb-2 text-danger text-center" ng-if="error">
+                        <span class="small" ng-bind="error" ></span>
+                    </div>
+                    <hr class="py-2 my-1">
+                    <form name="formUpdate" novalidate>
+                        <div class="form-group">
+                            <label>FullName:</label>
+                            <input type="text" ng-model="selected_admin.name" class="form-control" placeholder="Enter Fullname eg. Eagle Eye" pattern="" required="required">
+                            <span class="error" ng-if="formUpdate.name.$invalid">enter fullname</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address:</label>
+                            <input type="email" ng-model="selected_admin.email" class="form-control" placeholder="Enter email address eg. sample@mail.com" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tel Number:</label>
+                            <input type="text" ng-model="selected_admin.mobile" class="form-control" placeholder="EnterMobile Number. eg 0902 047 47474" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Username:</label>
+                            <input type="text" ng-model="selected_admin.username" class="form-control" placeholder="Enter Username eg. username" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" ng-model="selected_admin.password" class="form-control" placeholder="Enter Password" pattern="">
+                        </div>
+                        {{selected_admin.password}}
+                        <div class="form-group" ng-show="selected_admin.password">
+                            <label>Confirm Password:</label>
+                            <input type="password" ng-model="selected_admin.pwd" class="form-control" placeholder="Re Enter Password" pattern="" ng-required="selected_admin.password">
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn btn-outline-primary btn-sm" ng-show="formUpdate.$valid" type="submit" ng-click="updateAdmin();">
+                                Update Web Administrator!
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

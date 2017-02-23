@@ -1,43 +1,22 @@
-<div class="container">
+<admin-header user="session"></admin-header>
+
+<div class="container-fluid" ng-init="setTimer();">
     <div class="row">
-        <div class="col-md-2">
-
-            <div class="bootstrap-vertical-nav">
-
-                <button class="btn btn-primary hidden-md-up" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    <span class="">Menu</span>
-                </button>
-
-                <div class="collapse" id="collapseExample">
-                    <ul class="nav flex-column" id="exCollapsingNavbar3">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-
+        <div class="my-3 py-3 mx-auto text-center" style="width:80%!important;">
+            <style>
+                .dy-flip-clock{
+                    margin-right: auto!important;
+                    margin-left: auto!important;
+                    width:50%!important;
+                }
+            </style>
+            <dy-flip-clock time="{{ timer }}"></dy-flip-clock>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-8 offset-sm-1">
+        <div class="col-sm-8 offset-sm-2">
             <div class="card">
                 <div class="card-block">
-                    <div class="card-title">Select A Package</div>
-                    <div class="card-subtitle mb-2 text-muted">
-                        [<b>2</b> hour(s) <b>3</b> Miniute(s) <b>10</b> Second(s) left to make a selection]
-                    </div>
+                    <div class="card-title text-center">Select A Package</div>
                     <table class="table table-condensed col-sm-12">
                         <tbody>
                             <tr ng-repeat="i in [1, 2, 3]">

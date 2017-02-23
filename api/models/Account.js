@@ -6,18 +6,42 @@
  */
 
 module.exports = {
-
+    schema:true,
     attributes: {
         user:{
             model:'user',
-            unique:true
+            required:true
         },
         bank:{
-            model:'bank'
+            model:'bank',
+            required:true
+        },
+        name:{
+            type:'string',
+            required:true
+        },
+        number:{
+            type:'string',
+            required:true
         },
         account_type:{
-            collection:'accounttype',
-            via:'account'
+            type:'string',
+            enum:['savings', 'current'],
+            defaultsTo:'savings',
+            required:true
+        },
+        beforeCreate(values, cb){
+            values.number = trim(values.number);
+            cb();
+        }, beforeUpdate(values, cb){
+            values.number = trim(values.number);
+            cb();
         }
+    },
+    index:function(user, cb){
+        Account.find({user:user}).populate('bank').exec((err, response) => {
+            if(err || !response) cb(err);
+            else cb(false, response);
+        });
     }
 };

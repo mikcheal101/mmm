@@ -6,6 +6,17 @@
  */
 
 module.exports = {
+	get:function(req, res){
+		Account.index((err, response) => {
+			if(err || !response) {
+				console.log('error: ', err);
+				res.status(404).json(err);
+			} else {
+				console.log('response: ', response);
+				res.status(200).json(response);
+			}
+		});
+	},
 	type:function(req, res){
 		var params 	= req.params.all();
 		var result	= {};
@@ -37,5 +48,9 @@ module.exports = {
 		var params 	= req.params.all();
 		var result 	= Account.delete(params);
 		res.status(200).json(result);
+	},
+	getOne:function(req, res){
+		var params 	= req.params.all();
+		res.status(200).json({});
 	}
 };

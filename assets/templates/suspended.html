@@ -1,0 +1,71 @@
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-3">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">MMM</a>
+
+    </nav>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 offset-md-1">
+
+            <style>
+                .nb-error {
+                    margin: 0 auto;
+                    text-align: center;
+                    max-width: 750px;
+                    padding: 60px 30px;
+                }
+
+                .nb-error .error-code {
+                    color: #2d353c;
+                    font-size: 96px;
+                    line-height: 100px;
+                }
+
+                .nb-error .error-desc {
+                    font-size: 12px;
+                    color: #647788;
+                }
+                .nb-error .input-group{
+                    margin: 30px 0;
+                }
+            </style>
+
+
+            <div class="nb-error">
+                <div class="error-code my-3 py-3">SUSPENDED</div>
+                <h3 class="font-bold my-3 py-3">We couldn't find the page..</h3>
+
+                    <div class="error-desc my-3 py-3">
+                        Sorry, Your account has been suspended,
+                        <br>
+                        due to failure to meet with the system time requirements.
+                        <p>Please, contact the web administrator wuith your complaints on (0902 034 1200)</p>
+                        <p>Reagrds,</p>
+                        <p>MMM Nigeria</p>
+
+                        <hr>
+                        <ul class="list-inline text-center text-sm">
+                            <li class="list-inline-item"><span class="text-muted">Go to:</span>
+                            </li>
+                            <li class="list-inline-item"><a href="/public/authentication/login" class="text-muted">Login</a>
+                            </li>
+                            <li class="list-inline-item"><a href="/public/authentication/sign-up" class="text-muted">Register</a>
+                            </li>
+                        </ul>
+
+                        <div class="text-center">
+                            <span>©</span>
+                            <span> {{ today | date:'yyyy' }} </span>
+                            <span>-</span>
+                            <span>MMM NIGERIA</span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

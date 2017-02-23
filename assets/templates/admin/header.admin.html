@@ -1,0 +1,136 @@
+<header>
+    <!-- super administrator tabs -->
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-3" ng-show="user.usertype === 'super-administrator'" >
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">MMM</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto" >
+                <li class="nav-item ">
+                    <a class="nav-link" href="/secure/profile/dashboard">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/admin/profile/packages">Packages</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Customers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/admin/profile/customers">Registered Customers</a>
+                        <a class="dropdown-item" href="/admin/profile/my/customers">My Customers</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Payment(s)
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/admin/profile/payments">General Payments</a>
+                        <a class="dropdown-item" href="/admin/profile/my/payments">Payments To My Accounts</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/profile/banks">Banks</a>
+                </li>
+                <li class="nav-item" ng-hide="user.usertype !== 'super-administrator'">
+                    <a class="nav-link" href="/admin/profile/admins">Web Administrators</a>
+                </li>
+                <li class="nav-item dropdown pull-xs-right mr-auto">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{user.username}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Change Password</a>
+                        <!-- <a class="dropdown-item" href="#"></a> -->
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/authentication/logout">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- web administrator tabs -->
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-3" ng-show="user.usertype === 'administrator'" >
+       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+       </button>
+       <a class="navbar-brand" href="#">MMM</a>
+
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <ul class="navbar-nav mx-auto" >
+               <li class="nav-item ">
+                   <a class="nav-link" href="/secure/profile/dashboard">Home <span class="sr-only">(current)</span></a>
+               </li>
+               <li class="nav-item ">
+                   <a class="nav-link" href="/admin/profile/packages">Packages</a>
+               </li>
+               <li class="nav-item dropdown">
+                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Customers
+                   </a>
+                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                       <a class="dropdown-item" href="/admin/profile/customers">Registered Customers</a>
+                       <a class="dropdown-item" href="/admin/profile/my/customers">My Customers</a>
+                   </div>
+               </li>
+               <li class="nav-item dropdown">
+                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Payment(s)
+                   </a>
+                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                       <a class="dropdown-item" href="/admin/profile/payments">General Payments</a>
+                       <a class="dropdown-item" href="/admin/profile/my/payments">Payments To My Accounts</a>
+                   </div>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="/admin/profile/banks">Banks</a>
+               </li>
+               <li class="nav-item dropdown pull-xs-right mr-auto">
+                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       {{user.username}}
+                   </a>
+                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                       <a class="dropdown-item" href="#">Change Password</a>
+                       <!-- <a class="dropdown-item" href="#"></a> -->
+                       <div class="dropdown-divider"></div>
+                       <a class="dropdown-item" href="/authentication/logout">Sign Out</a>
+                   </div>
+               </li>
+           </ul>
+       </div>
+    </nav>
+
+    <!-- customer tabs -->
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-3" ng-show="user.usertype === 'customer'" >
+       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+       </button>
+       <a class="navbar-brand" href="#">MMM</a>
+
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <ul class="navbar-nav mx-auto" >
+               <li class="nav-item ">
+                   <a class="nav-link" href="/secure/profile/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+               </li>
+               <li class="nav-item ">
+                   <a class="nav-link" href="/admin/profile/packages">Payment History</a>
+               </li>
+               <li class="nav-item dropdown pull-xs-right mr-auto">
+                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       {{user.username}}
+                   </a>
+                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                       <a class="dropdown-item" href="#">Change Password</a>
+                       <!-- <a class="dropdown-item" href="#"></a> -->
+                       <div class="dropdown-divider"></div>
+                       <a class="dropdown-item" href="/authentication/logout">Sign Out</a>
+                   </div>
+               </li>
+           </ul>
+       </div>
+    </nav>
+</header>

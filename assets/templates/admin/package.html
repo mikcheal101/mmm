@@ -1,10 +1,9 @@
-<div class="container">
+<admin-header user="session"></admin-header>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
-            <!-- TODO: insert side panel -->
-        </div>
-        <div class="col-md-8 offset-md-1">
+        <div class="col-md-10 offset-md-1">
             <!-- TODO: display a form to create a package, update an existing one, delete an existing one -->
+
             <div class="card" ng-hide="selected.id">
                 <div class="card-block">
                     <div class="card-title text-center">Enter Package Detail(s) To Save</div>
@@ -32,7 +31,7 @@
             </div>
 
             <!-- update package -->
-            <div class="card" ng-show="selected.id">
+            <div class="card" ng-show="selected.id" ng-init="getSelected();">
                 <div class="card-block">
                     <div class="card-title text-center">Update Package Detail(s)</div>
                     <div class="card-subtitle pb-2 text-danger text-center" ng-if="error">

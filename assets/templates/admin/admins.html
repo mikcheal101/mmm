@@ -1,9 +1,7 @@
+<admin-header user="session"></admin-header>
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
-            <!-- TODO: insert side panel -->
-        </div>
-        <div class="col-md-8 offset-md-1">
+        <div class="col-md-10 offset-md-1">
             <!-- TODO: display a list of admins on the system excluding the super administrator -->
             <div class="card">
                 <div class="card-block">
@@ -14,17 +12,15 @@
                         <thead>
                             <th width="10%">#</th>
                             <th>Admin Username</th>
-                            <th width="25%">Customer Account(s)</th>
-                            <th width="5%"> <i class="glyphicon glyphicon-cogs"></i> </th>
+                            <th width="15%"> <i class="fa fa-cogs"></i> </th>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="x in packages | itemsPerPage: 20">
+                            <tr dir-paginate="admin in admins | itemsPerPage: 20">
                                 <td>1</td>
-                                <td> <a href="/admin/profile/admin/{{x.id}}">admin username</a> </td>
-                                <td>10</td>
+                                <td> <a href="/admin/profile/admin/{{ admin.id }}" ng-click="setSelectedAdmin(admin);" ng-bind="admin.username"></a> </td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-info">
-                                        <i class="glyphicon glyphicon-trash" ng-click="deleteAdmin(x);"></i>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fa fa-trash-o" ng-click="deleteAdmin(admin);"></i>
                                     </button>
                                 </td>
                             </tr>
