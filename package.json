@@ -34,7 +34,9 @@
     "rc": "1.0.1",
     "sails": "~0.12.11",
     "sails-disk": "~0.10.9",
-    "sails-mysql": "^0.11.5"
+    "sails-mysql": "^0.11.5",
+    "node": "^7.4.0",
+    "npm": "^4.1.2"
   },
   "scripts": {
     "debug": "node debug app.js",
@@ -43,7 +45,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/zeus/fashion_store.git"
+    "url": "https://github.com/mikcheal101/mmm.git"
   },
   "author": "zeus",
   "license": ""

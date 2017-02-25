@@ -116,4 +116,4 @@ npm-debug.log
 nbproject
 .idea
 .node_history
-assets/angular/node_modules
+#assets/angular/node_modules
