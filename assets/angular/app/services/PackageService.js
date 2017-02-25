@@ -56,5 +56,13 @@ var PackageService          = app.service('PackageService', ['$q', '$http', func
         return defer.promise;
     };
 
+    svc.saveCustPackage     = function(param){
+        var defer           = $q.defer();
+        $http.post('/profile/packages', param)
+            .then(aData => defer.resolve(aData.data))
+            .catch(aError => defer.reject(aError));
+        return defer.promise;
+    };
+
     return this;
 }]);

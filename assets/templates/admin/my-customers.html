@@ -48,19 +48,24 @@
                             <th>email address</th>
                             <th>username</th>
                             <th>Registration Date</th>
-                            <th> <i class="glyphicon glyphicon-cogs"></i> </th>
+                            <th width="15%" class="text-right"> <i class="fa fa-cog"></i> </th>
                         </thead>
                         <tbody>
                             <tr dir-paginate="customer in admin.my_customers | filter:search | itemsPerPage: 20">
-                                <!--<td> <a ng-href="/admin/profile/customer/{{ customer.id }}" ng-click="setSelected(customer);" > {{ customer.referencecode }} </a> </td> -->
                                 <td> <span class="btn btn-link" ng-click="setBank(customer);">{{ customer.referencecode }}</span> </td>
                                 <td>{{ customer.email }}</td>
                                 <td>{{ customer.username }}</td>
-                                <td>{{ customer.createdAt | date:'dd mm, yy'}}</td>
-                                <td>
+                                <td>{{ customer.createdAt | date:'dd mm, yy'}} {{ customer.timing }}</td>
+                                <td class="text-right">
                                     <button class="btn btn-sm btn-outline-danger">
                                         <i class="fa fa-trash-o" ng-click="admin.deleteCustomer(customer);"></i>
                                     </button>
+                                    <div ng-show="checkFree(customer.timing);">
+                                        &nbsp;
+                                        <button class="btn btn-sm btn-outline-success" ng-click="resetTiming(customer);">
+                                            <i class="fa fa-clock-o"></i> free user
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

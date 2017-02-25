@@ -1,6 +1,6 @@
 'use strict';
-var PackageController       = app.controller('PackageController', ['$scope','$location', '$window', 'PackageService', '$rootScope', '$routeParams', 'StorageService',
-    function($scope, $location, $window, PackageService, $rootScope, $routeParams, StorageService){
+var PackageController       = app.controller('PackageController', ['$scope','$location', '$window', 'PackageService', '$rootScope', '$routeParams', 'StorageService','$interval','CustomerService',
+    function($scope, $location, $window, PackageService, $rootScope, $routeParams, StorageService, $interval, CustomerService){
     $scope.packages         = [];
     $scope.selected         = {};
     $scope.error            = "";
@@ -16,7 +16,11 @@ var PackageController       = app.controller('PackageController', ['$scope','$lo
         });
     };
 
-    $scope.setTimer             = function(){
+    $scope.putPackage       = function(pack){
+        angular.copy(pack, $scope.selected);
+    };
+
+    $scope.setTimer         = function(){
         var secsLeft            = $scope.session.timing;
         var then                = new Date(secsLeft).getTime(),
             now                 = new Date().getTime(),
@@ -25,7 +29,7 @@ var PackageController       = app.controller('PackageController', ['$scope','$lo
         if($scope.session.usertype === 'customer') {
             if(diff_then_now < 0 ) {
                 $scope.timer = 0;
-                CustomerService.suspendCustomer().then(response => {
+                CustomerService.suspendCustomer($scope.session).then(response => {
                     $location.path('/secure/profile/suspended');
                 }).catch(err => console.error('error: ', err));
 
@@ -73,8 +77,10 @@ var PackageController       = app.controller('PackageController', ['$scope','$lo
             console.warn(err);
         });
     };
-    $scope.save             = function(param){
+    $scope.savePackage      = function(param){
+
         PackageService.savePackage(param).then(function(response){
+            console.log('recieved: ', response);
             // add item to list
             $scope.formCreate.$setPristine();
             $scope.formCreate.$setUntouched();
@@ -85,4 +91,15 @@ var PackageController       = app.controller('PackageController', ['$scope','$lo
         });
     };
 
+    $scope.saveCustPackage  = function(){
+        console.log('sending: ', $scope.selected);
+        $scope.selected.user = $scope.session.id;
+        PackageService.saveCustPackage($scope.selected).then(aData => {
+            console.log(aData);
+            // redirect to make-payment page
+            $location.path('/secure/profile/make-payment');
+        }).catch(aError => {
+            console.warn(aError);
+        });
+    };
 }]);

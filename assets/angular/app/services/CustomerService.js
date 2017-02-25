@@ -2,6 +2,15 @@
 
 var CustomerService                     = app.service('CustomerService', ['$q','$http',function($q, $http){
     var svc                             = this;
+    svc.resetTiming                     = function(customer){
+        var defer                       = $q.defer();
+        var url                         = '/customers/reset/';
+        $http
+            .put(url + customer.id)
+            .then(aData => defer.resolve(aData.data))
+            .catch(aError => defer.reject(aError));
+        return defer.promise;
+    };
     svc.loadCustomers                   = function(){
         var defer                       = $q.defer();
         var url                         = "/customers";

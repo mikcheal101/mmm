@@ -31,11 +31,13 @@ module.exports = {
             required:true
         },
         beforeCreate(values, cb){
-            values.number = trim(values.number);
-            cb();
+            values.number   = trim(values.number);
+            values.name     =_.startCase(values.name);
+            cb(null);
         }, beforeUpdate(values, cb){
             values.number = trim(values.number);
-            cb();
+            values.name     =_.startCase(values.name);
+            cb(null);
         }
     },
     index:function(user, cb){

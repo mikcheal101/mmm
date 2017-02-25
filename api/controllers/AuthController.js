@@ -17,19 +17,7 @@ module.exports 	= {
 				if(!err) {
 		            var now        		= moment(new Date());
 		            user.timeLeft		= moment(user.timing).diff(now, 'seconds');
-					User.findOne({id:user.id})
-						.populate('account')
-						.populate('userpackage')
-						.then(function(d){
-
-							req.session.user	= d;
-							res.status(200).json({message:'user registered!', data:true});
-						})
-						.catch(function(e){
-							req.session.user	= user;
-							res.status(200).json({message:'user registered!', data:true});
-						});
-
+					res.status(200).json({message:'user registered!', data:true});
 				} else {
 					res.status(200).json({message:'username, email or mobile number is already associated with another user!', data:false});
 				}
@@ -43,7 +31,8 @@ module.exports 	= {
 
 		passport.authenticate('local', function(err, user, info){
 			if(err){
-				return res.status(404).json({message:'database error', data:err});
+				console.log('local error: ', err);
+				return res.status(404).json({message:'database error'});
 			} else if(!user){
 				return res.status(200).json({message:'User with username/password combination does not exist!', data:err});
 			} else {
@@ -64,12 +53,10 @@ module.exports 	= {
 								.then(function(bData){
 									bData.timeLeft			= user.timeLeft;
 									req.session.user		= bData;
-									console.log('user found: ', bData);
 									return res.status(200).json({message:'user registered!', data:bData});
 								})
 								.catch(function(bError){
 									req.session.user	= user;
-									console.log('error: ', bError);
 									return res.status(200).json({message:'user registered!', data:false});
 								});
 						}

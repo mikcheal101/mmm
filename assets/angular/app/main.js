@@ -12,9 +12,53 @@ app.config(['$middlewareProvider', function($middlewareProvider){
 
         //// everyone is allowed here
         'everyone':function everyoneMiddleware(){
-            console.log('everyone called!');
             this.next();
         },
+
+        //// handle customer redirection
+        'customer-redirect':['$http','$location', function customerRedirect($http, $location){
+            var request     = this;
+            $http.get('/authentication/session').then(response => {
+                console.log('redirecting user');
+                var session = response.data.user;
+                if(typeof session === 'undefined') {
+                    request.redirectTo('/public/authentication/login');
+                } else if(session.usertype === 'customer') {
+                    // main redirection happens here
+                    if(session.userstatus === "suspended"){
+                        // head to the suspended page
+                        if($location.path() !== '/secure/profile/suspended')
+                            request.redirectTo('/secure/profile/suspended');
+                        else request.next();
+                    } else if(!session.account) {
+                        // head to accounting page
+                        if($location.path() !== '/secure/profile/account')
+                            request.redirectTo('/secure/profile/account');
+                        else request.next();
+                    } else if(!session.userpackage) {
+                        //head to package selection page
+                        if($location.path() !== '/secure/profile/packages')
+                            request.redirectTo('/secure/profile/packages');
+                        else request.next();
+                    } else if(['awaiting-confirmation', 'pending-confirmation', 'awaiting-first', 'awaiting-second'].indexOf(session.payment_status) <= -1) {
+                        console.log(session);
+                        if(['/secure/profile/make-payment', '/secure/profile/account', '/secure/profile/packages'].indexOf($location.path()) <= -1){
+                            request.redirectTo('/secure/profile/dashboard');
+                        } else {
+                            request.next();
+                        }
+
+                    } else if(!session.unmatched){
+                        // head to the matching page
+                        if($location.path() !== '/secure/profile/make-payment')
+                            request.redirectTo('/secure/profile/make-payment');
+                        else request.next();
+                    } else request.next();
+                } else request.next();
+            }).catch(aError => {
+                console.log('heading back to home page');
+            });
+        }],
 
         //// customer allowed urls
         'customer-auth':['$http', function customerAuth($http){
@@ -107,27 +151,27 @@ app.config(['$routeProvider','$locationProvider',  function($routeProvider, $loc
         .when('/secure/profile/dashboard', {
             templateUrl:'/templates/dashboard.html',
             controller:'UserController',
-            middleware:'customer-auth'
+            middleware:['customer-auth', 'customer-redirect']
         })
         .when('/secure/profile/account', {
             templateUrl:'/templates/account.html',
             controller:'AccountController',
-            middleware:'customer-auth'
+            middleware:['customer-auth', 'customer-redirect']
         })
         .when('/secure/profile/payments', {
             templateUrl:'/templates/payments.html',
             controller:'PaymentController',
-            middleware:'customer-auth'
+            middleware:['customer-auth', 'customer-redirect']
         })
         .when('/secure/profile/packages', {
             templateUrl:'/templates/packages.html',
             controller:'PackageController',
-            middleware:'customer-auth'
+            middleware:['customer-auth', 'customer-redirect']
         })
         .when('/secure/profile/make-payment', {
             templateUrl:'/templates/make-payment.html',
             controller:'PaymentController',
-            middleware:'customer-auth'
+            middleware:['customer-auth', 'customer-redirect']
         })
         .when('/secure/profile/suspended', {
             templateUrl:'/templates/suspended.html',
@@ -228,64 +272,9 @@ app.run(['$rootScope', '$window', '$location', 'SessionService','CustomerService
     $rootScope.headers.admin    = "/templates/admin/header.admin.html";
 
     $rootScope.$on('$routeChangeStart', function(evt, next, current){
-        var appTo       = $location.path().indexOf('/secure') !== -1;
-
-        if ($location.path().indexOf('/secure/profile/suspended') !== -1 ) {
-            console.log('/secure/profile/suspended -> called');
-        } else {
-            SessionService.getSession().then(function(d){
-                var user            = d.user;
-                $rootScope.session  = user;
-
-                if(appTo && user.usertype === 'customer'){
-                    //if the user still has time
-                    if(user.timeLeft >= 0){
-
-                        // check if the user has filled in accounting details
-                        if(user.account) {
-
-                            // check if user has selected package
-                            if(user.hasOwnProperty('userpackage')){
-
-                                // check for person user has been matched to
-                                if(user.hasOwnProperty('matched')){
-
-                                    // confirm if user has paid
-                                    if(user.hasOwnProperty('id')){
-
-                                    }
-                                } else {
-                                    // direct user to matching page
-                                }
-                            } else {
-                                // redirect to package selection page
-                                $location.path('/secure/profile/packages');
-                            }
-                        } else {
-                            //$window.location.href   = '/secure/profile/account';
-                            $location.path('/secure/profile/account');
-                            // head to account page
-                        }
-
-                    } else {
-                        // redirect to account suspended page
-                        console.log('redirecting to suspended');
-                        CustomerService.suspendCustomer(user).then(response => {
-                            console.log('location change ', response);
-                            $location.path('/secure/profile/suspended');
-                        }).catch(err => console.error('error: ', err));
-                    }
-                } else if(user.usertype === 'customer') {
-                    console.warn('redirecting to login page');
-                    //$location.path('/public/authentication/login');
-                }
-            }).catch(function(e){
-                //console.error('error: ', e);
-            });
-        }
-
-
-
-        // check if the logged in user is a customer and direct to the appropriate page
+        SessionService.getSession().then(function(d){
+            var user            = d.user;
+            $rootScope.session  = user;
+        }).catch(aError => {});
     });
 }]);

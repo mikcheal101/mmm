@@ -1,6 +1,6 @@
 'use strict';
-var CustomerController      = app.controller('CustomerController', ['$scope','StorageService','$rootScope','$location','$routeParams','CustomerService','BankingService',
-    function($scope, StorageService, $rootScope, $location, $routeParams, CustomerService, BankingService){
+var CustomerController      = app.controller('CustomerController', ['$scope','StorageService','$rootScope','$location','$routeParams','CustomerService','BankingService','PackageService',
+    function($scope, StorageService, $rootScope, $location, $routeParams, CustomerService, BankingService, PackageService){
 
     $scope.admin                = {};
     $scope.customer             = {};
@@ -11,6 +11,7 @@ var CustomerController      = app.controller('CustomerController', ['$scope','St
     $scope.admin.error          = "";
     $scope.banks                = [];
     $scope.account_types        = [];
+    $scope.packages             = [];
 
     $scope.customer             = {};
 
@@ -24,6 +25,18 @@ var CustomerController      = app.controller('CustomerController', ['$scope','St
         angular.copy(StorageService.clear(), $scope.admin.selected);
     };
 
+    $scope.resetTiming          = function(customer){
+        CustomerService
+            .resetTiming(customer)
+            .then(aData => console.log(aData))
+            .catch(aError => console.error(aError));
+    };
+
+    $scope.checkFree            = function(timing){
+        var now                 = new Date().getTime();
+        var later               = new Date(timing).getTime();
+        return later > now;
+    };
 
     $scope.setBank              = function(customer){
         if(customer.account) {
@@ -92,6 +105,14 @@ var CustomerController      = app.controller('CustomerController', ['$scope','St
         .then(response => angular.copy(response, $scope.banks))
         .catch(err => console.warn(err));
     };
+    $scope.loadPackages         = function(){
+        PackageService.getPackages().then(aData => {
+            $scope.packages = aData.data;
+            console.log('packages found!', $scope.packages);
+        }).catch(aError => {
+            console.error(aError);
+        });
+    };
     $scope.customerLoadBanks    = function(){
         console.log('in here');
         BankingService.customerGetBanks()
@@ -120,4 +141,16 @@ var CustomerController      = app.controller('CustomerController', ['$scope','St
             .catch(err => console.warn(err));
     };
 
+    $scope.matchMe              = function(){
+        CustomerService.matchMe($scope.session, $scope.match).then(aData => {
+            $scope.session.timing       = aData.me.timing;
+            $rootScope.session.timing   = aData.me.timing;
+            console.log(aData);
+        }).catch(aError => {
+            console.error(aError);
+        });
+    };
+    $scope.makePayment          = function(){
+
+    };
 }]);

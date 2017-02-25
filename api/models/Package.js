@@ -17,15 +17,16 @@ module.exports = {
             type:'string',
             required:true
         },
-        userpackage:{
-            model:'userpackage'
+        users:{
+            collection:'user',
+            via:'userpackage'
         }
     },
 
     getPackages:function(opts, cb){
         Package
             .find()
-            .populate('userpackage')
+            .populate('users')
             .then(function(d){
                 cb(false, d);
             })
@@ -36,7 +37,7 @@ module.exports = {
     getPackage:function(opts, cb){
         Package
             .findOne({id:opts})
-            .populate('userpackage')
+            .populate('users')
             .then(function(d){
                 cb(false, d);
             })

@@ -14,7 +14,7 @@ var BankingService                  = app.service('BankingService', ['$q', '$htt
     svc.customerGetBanks            = function(){
         var defer                   = $q.defer();
         $http.get('/profile/banking').then(response => {
-            console.log('response: ', response);
+            console.log('response: ', response.data);
             defer.resolve(response.data);
         }).catch(err => {
             console.error(err);

@@ -1,5 +1,6 @@
 
-var AuthController  = app.controller('AuthController', ['$scope', '$window', 'AuthService', function($scope, $window, AuthService){
+var AuthController  = app.controller('AuthController', ['$scope', '$window', 'AuthService', '$location',
+    function($scope, $window, AuthService, $location){
     $scope.login            = {};
     $scope.registration     = {};
     $scope.forgotPassword   = {};
@@ -41,11 +42,11 @@ var AuthController  = app.controller('AuthController', ['$scope', '$window', 'Au
                 $scope.data    = {};
                 // TODO: Display success alert
                 console.log('swapping paths');
-                $window.location.href   = '/secure/profile/dashboard';
+                $window.location.href = '/public/authentication/login';
             }
         }).catch(function(e){
-            //$scope.registration.error     = e;
-            //console.log(e);
+            $scope.registration.error     = 'Connection Error, Please contact web administrator';
+            $window.location.href = '/public/authentication/login';
         });
     };
 }]);

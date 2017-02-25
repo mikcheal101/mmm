@@ -54,16 +54,21 @@ module.exports.routes = {
     'get    /authentication/signout'        : 'Auth.signOut',               /// url to logout of the system without a redirection
 
 
-    'post   /profile/packages'              : 'Customer.package',           /// post package to register for
+    'post   /profile/packages'              : 'Customer.savepackage',       /// post package to register for
     'post   /profile/commit'                : 'Customer.commit',            /// commit payment
     'post   /profile/banking'               : 'Customer.banking',           /// post banking details
+    'post   /profile/match'                 : 'Customer.matchme',           /// match me to an account
+
+    'post  /profile/gettopay'               : 'Customer.getToPay',          /// get whom I am to pay to
+
 
     'get    /profile/banking/type'          : 'Account.type',               /// list all the account types
 
     'get    /profile/packages'              : 'Package',                    /// list all packages
-    'get    /profile/banking'               : 'Banking',                    /// list all banks
+    'get    /profile/banking'               : 'Banking.index',              /// list all banks
     'get    /profile/banking/details'       : 'Customer.my_bank',           /// display my banking details
     'get    /profile/payments'              : 'Customer.payments',          /// list all my payments
+    'get    /profile/match'                 : 'Customer.getMatch',          /// get next account to match to
 
 
     /////////////////////////////////////// admin urls ///////////////////////////////////////////
@@ -90,6 +95,8 @@ module.exports.routes = {
     'put    /customers/unsuspend/:id'       : 'Customer.unsuspend',         //// unsuspend a customer account
     'put    /customers/my/:id'              : 'Customer.update',            //// update my customer account
     'put    /web-admin/:id'                 : 'WebAdmin.update',            //// update web administrator from super administrator
+    'put    /customers/reset/:id'           : 'Customer.resetTiming',       //// reset customer timing
+
 
     'delete /banking/bank/:id'              : 'Banking.delete',             //// delete a bank from the list
     'delete /banking/account/type/:id'      : 'Account.delete',             //// delete an account type

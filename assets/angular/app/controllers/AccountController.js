@@ -34,7 +34,7 @@ var AccountController           = app.controller('AccountController', ['$scope',
         if($scope.session.usertype === 'customer') {
             if(diff_then_now < 0) {
                 $scope.timer = 0;
-                CustomerService.suspendCustomer().then(response => {
+                CustomerService.suspendCustomer($scope.session).then(response => {
                     $location.path('/secure/profile/suspended');
                 }).catch(err => console.error('error: ', err));
 

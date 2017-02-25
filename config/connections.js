@@ -55,6 +55,14 @@ module.exports.connections = {
       password:'mikkytrionze',
       database:'mmm_sample'
   },
+  
+  heroku_settings : {
+      adapter: 'sails-mysql',
+      host:'eu-cdbr-west-01.cleardb.com',
+      user:'be4e37b21056a1',
+      password:'4f59d7c4',
+      database:'heroku_5d47f2724a596fd'
+  },
 
   /***************************************************************************
   *                                                                          *

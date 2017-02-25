@@ -11,27 +11,35 @@
                 }
             </style>
             <dy-flip-clock time="{{ timer }}"></dy-flip-clock>
+
+            {{ session }}
         </div>
 
-        <div class="col-sm-8 offset-sm-2">
+        <div class="col-sm-8 offset-sm-2" ng-init="loadPackages();">
             <div class="card">
                 <div class="card-block">
                     <div class="card-title text-center">Select A Package</div>
-                    <table class="table table-condensed col-sm-12">
-                        <tbody>
-                            <tr ng-repeat="i in [1, 2, 3]">
-                                <td width="10%">
-                                    <input type="radio" ng-model="d.option">
-                                </td>
-                                <td>
-                                    # 3,000
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-right">
-                        <button class="btn btn-outline-primary btn-sm">confirm selection</button>
-                    </div>
+                        <div class="my-3 py-3" ng-show="selected.name">
+                            <h1 class="text-center">{{ selected.name }}</h1>
+                            <h3 class="text-center text-success"># {{ selected.amount }}</h3>
+                            <div class="text-center my-3 py-3">
+                                <button class="btn btn-outline-primary btn-sm" ng-click="saveCustPackage();">confirm selection</button>
+                            </div>
+                            <hr class="my-3 py-3">
+                        </div>
+
+                        <table class="table table-condensed col-sm-12">
+                            <tbody>
+                                <tr ng-repeat="package in packages">
+                                    <td width="60%">
+                                        <button class="btn btn-link" ng-click="putPackage(package);"> {{ package.name }} </button>
+                                    </td>
+                                    <td>
+                                        # {{ package.amount }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>

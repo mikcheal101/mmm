@@ -18,7 +18,12 @@ passport.use(new LocalStrategy({
     },
     function(username, password, done){
         User.findOne({username:username})
+            .populate('account')
+
+            .populate('matchedToPay')
+            .populate('matchedToBePaidBy')
             .then(function(user){
+                console.log('user ', user);
                 if(!user){
                     return done(null, false, {message:'Wrong Username/Password Combination'});
                 } else{
@@ -26,7 +31,30 @@ passport.use(new LocalStrategy({
                         if(!results){
                             return done(null, false, {message:'Wrong Username/Password Combination'});
                         } else{
-                            return done(null, user);
+
+                            if(user.account) {
+                                Account
+                                    .findOne({id:user.account.id})
+                                    .populate('bank')
+                                    .then(aData => {
+                                        user.account = aData;
+                                        console.log('aData Banks: ', aData);
+                                        Package.findOne({id:user.userpackage}).then(bData => {
+                                            user.userpackage    = bData;
+                                            console.log('aData package: ', bData);
+                                            return done(null, user);
+                                        })
+                                        .catch(bError => {
+                                            console.log('passport error 2: ', bError);
+                                            return done(bError);
+                                        });
+
+                                    })
+                                    .catch(aError => {
+                                        console.log('passport Error: ', aError);
+                                        return done(aError);
+                                    });
+                            } else return done(null, user);
                         }
                     });
                 }

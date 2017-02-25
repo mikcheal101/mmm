@@ -21,7 +21,6 @@ module.exports = {
 				res.status(200).json(d);
 			});
 		}
-
 		else res.status(200).json({message:'no such url'});
 	},
 	getBank:function(req, res){

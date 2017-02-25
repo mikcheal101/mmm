@@ -26,8 +26,10 @@ module.exports = {
             unique:true
         },
         paymentstatus:{
-            collection:'paymentstatus',
-            via:'payment'
+            type:'string',
+            enum:['pending-approval', 'approved'],
+            required:true,
+            defaultsTo:'pending-approval'
         }
     },
 
