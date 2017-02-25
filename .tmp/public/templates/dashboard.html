@@ -1,0 +1,102 @@
+<admin-header user="session"></admin-header>
+
+<div class="container">
+    <div class="row" ng-show="1 !== 1">
+        <div class="col-sm-12">
+            <!-- TODO: add the alert for a pending payment approval -->
+            <div class="card my-3">
+                <div class="card-block">
+                    <div class="card-title text-center">Payment recieved!</div>
+                    <p class="card-subtitle text-center text-success mb-2">
+                        Please, confirm payment made to your account
+                    </p>
+                    <p class="card-subtitle text-center text-muted text-danger mb-2 small">
+                        [<b>2</b> hour(s) <b>3</b> Miniute(s) <b>10</b> Second(s) left to confirm payment]
+                    </p>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td width="50%" >Payee Name:</td>
+                            <td>Sample Name</td>
+                        </tr>
+                        <tr>
+                            <td>Payee Account:</td>
+                            <td>0899876789</td>
+                        </tr>
+                        <tr>
+                            <td>Payee Mobile Number:</td>
+                            <td>09020464231</td>
+                        </tr>
+                        <tr>
+                            <td>Transaction Amount (NGN):</td>
+                            <td>3,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Transaction Date & Time:</td>
+                            <td>21st January, 2017</td>
+                        </tr>
+                    </table>
+                    <div class="text-right">
+                        <button class="btn btn-outline-primary btn-sm" ng-click="confirm.payment();">confirm payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div ng-class="1 === 1 ? 'col-md-10 offset-md-1':'col-md-12'">
+            <hr ng-class="1 !== 1 ? 'my-3 py-3':'py-1'">
+            <h5 class="text-left">User Details:</h5>
+            <table class="table">
+                <tr>
+                    <td class="text-left text-bold bold" width="30%">Reference Code:</td>
+                    <td>
+                        <h3 ng-bind="session.referencecode" class="text-info"></h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left text-bold bold" width="30%">Full Name:</td>
+                    <td>
+                        <code ng-bind="session.name"></code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left text-bold bold">email address:</th>
+                    <td>
+                        <code ng-bind="session.email"></code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left text-bold bold">Mobile Number:</th>
+                    <td>
+                        <code ng-bind="session.mobile"></code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left text-bold bold">Username:</th>
+                    <td>
+                        <code ng-bind="session.username"></code>
+                    </td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <div class="text-center my-3 py-3" ng-hide="session.usertype === 'super-administrator' || session.usertype === 'administrator'">
+                <a href="/secure/profile/account" class="btn btn-outline-danger btn-md my-3">
+                    Add Account Details before <span ng-bind="session.timing | date:'EEEE hh : mm : ss dd MMM, yyyy'" ng-init="setTimer(session.timing);"></span>
+                </a>
+                <div class="my-3 py-3 text-center">
+                    <style>
+                        .dy-flip-clock{
+                            margin-right: auto!important;
+                            margin-left: auto!important;
+                            width:50%!important;
+                        }
+                    </style>
+                    <dy-flip-clock time="{{ timer }}"></dy-flip-clock>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <base href="/">
+        <title>MMM - sample title</title>
+        <link rel="stylesheets" href="node_modules/bootstrap/dist/bootstrap.min.css" />
+
+
+        <script src="js/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="js/node_modules/tether/dist/js/tether.min.js"></script>
+        <script src="js/dependencies/sails.io.js"></script>
+        <script src="js/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script src="js/node_modules/angular/angular.js"></script>
+        <script src="js/node_modules/angular-route/angular-route.min.js"></script>
+
+        <script src="app/main.js"></script>
+
+        <script src="app/controllers/AuthController.js"></script>
+
+        <script src="app/services/AuthService.js"></script>
+
+        <!-- -directives -->
+        <script src="app/directives/Headers.js"></script>
+
+    </head>
+    <body>
+        
+        <div ng-view></div>
+    </body>
+</html>

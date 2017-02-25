@@ -1,0 +1,80 @@
+<admin-header user="session"></admin-header>
+<div class="container-fluid">
+    <div class="row" ng-show="admin.selected.name">
+
+        <hr>
+    </div>
+    <div class="row">
+
+        <div ng-class="admin.selected.name ? 'col-md-4':'hidden-sm-up'">
+            <div class="card mb-3">
+                <div class="card-block">
+                    <div class="card-title mb-1 pb-1" ng-bind="admin.selected.name"></div>
+                    <small class="card-text mb-3 pb-3" ng-bind="admin.selected.username"></small>
+                    <table class="table mt-3 pt-3">
+                        <tr>
+                            <th width="70%">Account Name:</th>
+                            <td> <span ng-bind="admin.selected.account.name"></span> </td>
+                        </tr>
+                        <tr>
+                            <th>Account Bank:</th>
+                            <td> <span ng-bind="admin.selected.account.bank.name"></span> </td>
+                        </tr>
+                        <tr>
+                            <th>Account Number:</th>
+                            <td> <span ng-bind="admin.selected.account.number"></span> </td>
+                        </tr>
+                        <tr>
+                            <th>Account Type:</th>
+                            <td> <span ng-bind="admin.selected.account.account_type"></span> </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div ng-class="admin.selected.name ? 'col-md-8':'col-md-10 offset-1'">
+            <!-- TODO: display a list of my customers on the system -->
+            <div class="card" ng-init="admin.loadMyCustomers();">
+                <div class="card-block">
+                    <div class="card-title text-center">My Customers Listing</div>
+                    <a href="/admin/profile/my/customer" class="text-uppercase mb-3 btn btn-sm btn-outline-primary">create customer account</a>
+                    <div class="form-group">
+                        <input type="text" ng-model="search"  class="form-control" placeholder="Search for customer">
+                    </div>
+                    <table class="table table-striped" >
+                        <thead>
+                            <th>reference code</th>
+                            <th>email address</th>
+                            <th>username</th>
+                            <th>Registration Date</th>
+                            <th width="15%" class="text-right"> <i class="fa fa-cog"></i> </th>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="customer in admin.my_customers | filter:search | itemsPerPage: 20">
+                                <td> <span class="btn btn-link" ng-click="setBank(customer);">{{ customer.referencecode }}</span> </td>
+                                <td>{{ customer.email }}</td>
+                                <td>{{ customer.username }}</td>
+                                <td>{{ customer.createdAt | date:'dd mm, yy'}} {{ customer.timing }}</td>
+                                <td class="text-right">
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fa fa-trash-o" ng-click="admin.deleteCustomer(customer);"></i>
+                                    </button>
+                                    <div ng-show="checkFree(customer.timing);">
+                                        &nbsp;
+                                        <button class="btn btn-sm btn-outline-success" ng-click="resetTiming(customer);">
+                                            <i class="fa fa-clock-o"></i> free user
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<admin-header user="session"></admin-header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <!-- TODO: display a list of packages on the system -->
+
+            <div class="card">
+                <div class="card-block">
+                    <div class="card-title text-center">Packages Listing</div>
+                    <a href="/admin/profile/package" class="btn btn-sm btn-outline-primary mb-3 text-uppercase">create Package</a>
+
+                    <table class="table table-striped" ng-init="loadPackages();">
+                        <thead>
+                            <th width="10%">#</th>
+                            <th>Package Name</th>
+                            <th width="25%">Package Amount (NGN)</th>
+                            <th width="5%"> <i class="fa fa-cogs"></i> </th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in packages">
+                                <td>{{ $index + 1 }}</td>
+                                <td> <a ng-href="/admin/profile/package/{{ item.id }}" ng-click="setSelected(item);">{{ item.name }}</a> </td>
+                                <td>{{ item.amount }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fa fa-trash-o" ng-click="delete(item);"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<admin-header user="session"></admin-header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <!-- TODO: display a form to create a package, update an existing one, delete an existing one -->
+
+            <div class="card" ng-hide="selected.id">
+                <div class="card-block">
+                    <div class="card-title text-center">Enter Package Detail(s) To Save</div>
+                    <div class="card-subtitle pb-2 text-danger text-center" ng-if="error">
+                        <span class="small" ng-bind="error" ></span>
+                    </div>
+                    <hr class="py-2 my-1">
+                    <form name="formCreate" novalidate>
+                        <div class="form-group">
+                            <label>Package Name:</label>
+                            <input type="text" ng-model="data.name" class="form-control" placeholder="Enter Package Name eg. Platinum" pattern="" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Package Amount:</label>
+                            <input type="text" ng-model="data.amount" class="form-control" placeholder="Enter Package Amount eg. 3000" pattern="" required="required">
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn btn-outline-primary btn-sm" ng-show="formCreate.$valid" type="submit" ng-click="save(data);">
+                                Save!
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- update package -->
+            <div class="card" ng-show="selected.id" ng-init="getSelected();">
+                <div class="card-block">
+                    <div class="card-title text-center">Update Package Detail(s)</div>
+                    <div class="card-subtitle pb-2 text-danger text-center" ng-if="error">
+                        <span class="small" ng-bind="error" ></span>
+                    </div>
+                    <hr class="py-2 my-1">
+                    <form name="formUpdate" novalidate>
+                        <div class="form-group">
+                            <label>Package Name:</label>
+                            <input type="text" ng-model="selected.name" class="form-control" placeholder="Enter Package Name eg. Platinum" pattern="" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Package Amount:</label>
+                            <input type="text" ng-model="selected.amount" class="form-control" placeholder="Enter Package Amount eg. 3000" pattern="" required="required">
+                        </div>
+
+                        <div class="text-right">
+                            <div class="btn-group" role="group" ng-show="formUpdate.$valid">
+                                <button class="btn btn-outline-primary btn-sm" type="submit" ng-click="update();">
+                                    Update!
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm" type="submit" ng-click="delete(data);">
+                                    Delete!
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

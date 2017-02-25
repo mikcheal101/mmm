@@ -1,0 +1,73 @@
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-3">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">MMM</a>
+
+    </nav>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <div class="card">
+                <div class="card-block">
+                    <div class="card-title text-center">Create a New Account</div>
+                    <small class="card-subtitle pb-2 text-danger text-center" ng-if="registration.error">
+                        <span ng-bind="registration.error" ></span>
+                    </small>
+                    <hr class="py-2 my-1">
+                    <form novalidate="novalidate" name="form">
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" ng-model="data.name" name="name"  class="form-control" placeholder="Enter your Full Name" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address:</label>
+                            <input type="email" ng-model="data.email" class="form-control" placeholder="Enter your Email Address" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Number:</label>
+                            <input type="text" ng-model="data.mobile" class="form-control" placeholder="Enter your Mobile Number eg:090XXXXXX or 08XXXXXXX" pattern="" required="required">
+                        </div>
+
+                        <hr class="py-2">
+                        <div class="form-group">
+                            <label>Username:</label>
+                            <input type="text"ng-minlength="8" ng-model="data.username" class="form-control" placeholder="Enter your Choosen Username" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" ng-minlength="8" ng-model="data.password" class="form-control" name="password" placeholder="Enter Password" pattern="" required="required"x>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Confirm Password:
+                                <small class="text-danger" ng-show="(form.password.$touched && form.password2.$touched) && (form.password.$modelValue !== form.password2.$modelValue)">
+                                    Passwords do not match!
+                                </small>
+                            </label>
+                            <input type="password" ng-model="data.confirmpassword" class="form-control" name="password2" placeholder="Re enter Password" pattern="" required="required"
+                                ng-pattern="form.password.$modelValue">
+                        </div>
+
+                        <hr class="py-2 mt-2">
+                        <div class="text-right">
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-outline-primary btn-sm" ng-click="registration.click(data, form);" type="submit"ng-if="form.$valid">
+                                    Register
+                                </button>
+                                <a class="btn btn-sm btn-outline-primary" href="/public/authentication/login">i already own an account</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

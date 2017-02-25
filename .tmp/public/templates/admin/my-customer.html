@@ -1,0 +1,211 @@
+<admin-header user="session"></admin-header>
+<div class="container-fluid" ng-init="getSelected();">
+    <div class="row">
+        <div class="col-md-10 offset-md-1 mb-3 pb-3">
+            <!-- TODO: display a form to craete a customer for the admin -->
+            <div class="card" ng-show="admin.selected.id">
+                <div class="card-block">
+                    <div class="card-title text-center">Enter Customer Detail(s) To Update</div>
+                    <div class="card-subtitle pb-2 text-danger text-center" ng-if="error">
+                        <span class="small" ng-bind="error" ></span>
+                    </div>
+                    <hr class="py-2 my-1">
+                    <form name="formUpdate" novalidate>
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" ng-model="selected.name" name="name"  class="form-control" placeholder="Enter the Customer's Full Name" pattern="" required="required">
+                            <span class="error" ng-if="formUpdate.name.$invalid"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address:</label>
+                            <input type="email" ng-model="selected.email" class="form-control" placeholder="Enter the Customer's Email Address" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Number:</label>
+                            <input type="text" ng-model="selected.mobile" class="form-control" placeholder="Enter the Customer's Mobile Number eg:090XXXXXX or 08XXXXXXX" pattern="" required="required">
+                        </div>
+
+                        <hr class="py-2">
+                        <div class="form-group">
+                            <label>Username:</label>
+                            <input type="text"ng-minlength="8" ng-model="selected.username" class="form-control" placeholder="Enter the Customer's Choosen Username" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" ng-minlength="8" ng-model="selected.password" class="form-control" name="password" placeholder="Enter the Customer's Password" pattern="" required="required"x>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Confirm Password:
+                                <small class="text-danger" ng-show="(formUpdate.password.$touched && formUpdate.password2.$touched) &&
+                                    (formUpdate.password.$modelValue !== formUpdate.password2.$modelValue)">
+                                    Passwords do not match!
+                                </small>
+                            </label>
+                            <input type="password" ng-model="selected.confirmpassword" class="form-control" name="password2" placeholder="Re enter Password" pattern="" required="required"
+                                ng-pattern="formUpdate.password.$modelValue">
+                        </div>
+
+                        <hr class="py-2">
+                        <div class="form-group">
+                            <label for="">Bank Name:</label>
+                            <select name="bank" class="form-control" ng-model="selected.bank" ng-options="lbl as bank.name for bank in banks">
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Account Type:</label>
+                            <select name="bank" class="form-control">
+                                <option>Savings Account</option>
+                                <option>Current Account</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Account Name:</label>
+                            <input name="" class="form-control" placeholder="Enter Account Name" pattern="" required="" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">Account Number:</label>
+                            <input name="" class="form-control" placeholder="Enter Account Number" pattern="" required="" >
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn btn-outline-primary btn-sm" ng-show="formUpdate.$valid" type="submit" ng-click="saveCustomer(data);">
+                                Save!
+                            </button>
+
+                            <div class="text-right">
+                                <div class="btn-group" role="group" ng-show="formUpdate.$valid">
+                                    <button class="btn btn-outline-primary btn-sm" type="submit" ng-click="updateCustomer();">
+                                        Update!
+                                    </button>
+                                    <button class="btn btn-outline-primary btn-sm" type="submit" ng-click="deleteCustomer(data);">
+                                        Delete!
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Create Customer -->
+            <div class="card" ng-hide="admin.selected.id">
+                <div class="card-block">
+                    <div class="card-title text-center">Enter Customer Detail(s) To Save</div>
+                    <div class="card-subtitle pb-2 text-danger text-center" ng-show="admin.error">
+                        <span class="small" ng-bind="admin.error" ></span>
+                    </div>
+                    <hr class="py-2 my-1">
+                    <form name="formCreate" novalidate>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Name:</label>
+                                <input type="text" ng-model="customer.user.name" name="name"  class="form-control" placeholder="Enter Customer's Full Name" pattern="" required="required">
+                                <span class="error" ng-if="formCreate.name.$invalid"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Email Address:</label>
+                                <input type="email" ng-model="customer.user.email" class="form-control" placeholder="Enter Customer's Email Address" pattern="" required="required">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Mobile Number:</label>
+                                <input type="text" ng-model="customer.user.mobile" class="form-control" placeholder="Enter Customer's Mobile Number eg:090XXXXXX or 08XXXXXXX" pattern="" required="required">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Username:</label>
+                                <input type="text" ng-minlength="8" ng-model="customer.user.username" class="form-control" placeholder="Enter Customer's Choosen Username" pattern="" required="required">
+                            </div>
+                        </div>
+
+
+                        <hr class="py-2">
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Password:</label>
+                                <input type="password" ng-minlength="8" ng-model="customer.user.password" class="form-control" name="password" placeholder="Enter Password" pattern="" required="required"x>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>
+                                    Confirm Password:
+                                    <small class="text-danger" ng-show="(formCreate.password.$touched && formCreate.password2.$touched) &&
+                                        (formCreate.password.$modelValue !== formCreate.password2.$modelValue)">
+                                        Passwords do not match!
+                                    </small>
+                                </label>
+                                <input type="password" ng-model="customer.user.confirmpassword" class="form-control" name="password2" placeholder="Re enter Password" pattern="" required="required"
+                                    ng-pattern="formCreate.password.$modelValue">
+                            </div>
+                        </div>
+
+                        <hr class="py-2">
+
+                        <div class="row">
+                            <div class="form-group col-md-6" ng-init="loadBanks();">
+                                <label for="">Bank Name: </label>
+                                <select name="bank" class="form-control" ng-options="bank as bank.name for bank in banks track by bank.id"
+                                ng-model="customer.account.bank" required="required">
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="">Account Type: </label>
+                                <select name="account_type" class="form-control" ng-model="customer.account.account_type" required="required">
+                                    <option>savings</option>
+                                    <option>current</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="">Account Name:</label>
+                                <input name="acc_name" class="form-control" placeholder="Enter Account Name" ng-model="customer.account.name" pattern="" required="required" >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">Account Number:</label>
+                                <input name="acc_number" class="form-control" placeholder="Enter Account Number" ng-model="customer.account.number" pattern="" required="required" >
+                            </div>
+                        </div>
+
+                        <hr class="py-2">
+                        <div class="row">
+
+                            <div class="form-group col-md-6" ng-init="loadPackages();">
+                                <label for="">Package: </label>
+                                <select name="package" class="form-control" ng-options="package as package.name for package in packages track by package.id"
+                                    ng-model="customer.userpackage" required="required">
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Package Price:</label>
+                                <br>
+                                <span class="pl-2" ng-bind="customer.userpackage.amount"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="text-right">
+                            <button class="btn btn-outline-primary btn-sm" ng-show="formCreate.$valid" type="submit" ng-click="admin.saveCustomer(customer);">
+                                Save!
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

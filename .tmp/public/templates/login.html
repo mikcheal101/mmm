@@ -1,0 +1,47 @@
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-3">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">MMM</a>
+
+    </nav>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <div class="card">
+                <div class="card-block">
+                    <div class="card-title text-center">Sign In</div>
+                    <div class="card-subtitle pb-2 text-danger text-center" ng-if="login.error">
+                        <span class="small" ng-bind="login.error" ></span>
+                    </div>
+                    <hr class="py-2 my-1">
+                    <form name="form" novalidate>
+
+                        <div class="form-group">
+                            <label>Username:</label>
+                            <input type="text" ng-model="data.username"  class="form-control" placeholder="Enter Username" pattern="" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" ng-model="data.password" class="form-control" placeholder="Enter Password" pattern="" required="required">
+                        </div>
+
+                        <div class="text-right">
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-outline-primary btn-sm" ng-show="form.$valid" type="submit" ng-click="login.click(data);">
+                                    Sign In!
+                                </button>
+                                <a class="btn btn-outline-primary btn-sm pull-left" href="/public/authentication/forgot-password">forgot password</a>
+                                <a class="btn btn-outline-primary btn-sm" href="/public/authentication/sign-up">new user</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

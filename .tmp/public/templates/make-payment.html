@@ -1,0 +1,103 @@
+<admin-header user="session"></admin-header>
+
+<div class="container-fluid" ng-init="loadMatch();">
+    <div class="row">
+        <div class="col-md-8 offset-md-2" ng-show="match.id">
+            <div class="my-3 py-3 mx-auto text-center" style="padding-left:50px!important;" ng-init="setTimer();">
+                <style>
+                    .dy-flip-clock{
+                        margin-right: auto!important;
+                        margin-left: auto!important;
+                        width:50%!important;
+                    }
+                </style>
+                <dy-flip-clock time="{{ timer }}"></dy-flip-clock>
+            </div>
+        </div>
+        <hr>
+        <div class="col-md-12" ng-hide="match.id">
+            <div class="card py-3 my-3">
+                <h3 class="card-title text-center">Match Status</h3>
+                <div class="card-subtitle py-2 text-center text-info">Awating Match!</div>
+            </div>
+        </div>
+        {{ session }} - {{ match }}
+        <div class="col-md-8 offset-md-2" ng-show="match.id" >
+            <div class="card">
+                <div class="card-block">
+                    <h3 class="card-title text-center mb-3">Match Found</h3>
+                    <div class="card-title text-center">Make Payment</div>
+                    <div class="card-subtitle py-1 my-1 text-center text-danger" ng-bind="error"></div>
+
+                    <table class="table col-sm-12 mt-3">
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Account Name:
+                            </th>
+                            <td>
+                                <code ng-bind="match.account.name"></code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Bank Name:
+                            </th>
+                            <td>
+                                <code ng-bind="match.account.bank.name"></code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Account Type:
+                            </th>
+                            <td>
+                                <code ng-bind="match.account.account_type"></code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Account Number:
+                            </th>
+                            <td>
+                                <code ng-bind="match.account.number"></code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="50%" class="text-right">
+                                Payer Mobile Number:
+                            </th>
+                            <td>
+                                <code ng-bind="match.mobile"></code>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="toMatch" ng-hide="session.matchedToPay">
+                        <div class="text-center">
+                            <button class="btn btn-sm btn-outline-primary" ng-click="matchMe();">
+                                <i class="fa fa-check-circle-o"></i> &nbsp; Match Us!
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="toPay" ng-show="session.matchedToPay">
+                        <div class="text-center">
+                            <p>I have made the payment</p>
+                            <small class="text-info">Please, ensure your scanned payment copy is in <b><u>jpg or jpeg or png</u></b> format</small>
+                        </div>
+                        <br>
+
+                        <div class="text-center my-3 py-3">
+                            <form enctype="multipart/form-data">
+                                <div class="btn btn-outline-primary btn-md" ngf-select="upload($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'">
+                                    <i class="fa fa-upload"></i> &nbsp; Upload on file select
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
