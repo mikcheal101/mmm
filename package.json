@@ -1,7 +1,7 @@
 {
-  "name": "fashion_store",
-  "private": true,
-  "version": "0.0.0",
+  "name": "MMM Sample",
+
+  "version": "1.0.0",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
