@@ -17,9 +17,11 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
+   /*
     models: {
         connection: 'mysql_settings'
     },
     hookTimeout: 40000
+    */
 
 };

@@ -48,6 +48,7 @@ module.exports.connections = {
   //   database: 'YOUR_MYSQL_DB' //optional
   // },
 
+/*
   mysql_settings : {
       adapter: 'sails-mysql',
       host:'localhost',
@@ -55,7 +56,8 @@ module.exports.connections = {
       password:'mikkytrionze',
       database:'mmm_sample'
   },
-  
+  */
+
   heroku_settings : {
       adapter: 'sails-mysql',
       host:'eu-cdbr-west-01.cleardb.com',
