@@ -79,4 +79,7 @@ module.exports = function(grunt) {
   invokeConfigFn(taskConfigurations);
   invokeConfigFn(registerDefinitions);
 
+  grunt.registerTask('heroku:production', 'clean less mincss uglify');
+  grunt.registerTask('heroku:development', 'clean less mincss');
+
 };
