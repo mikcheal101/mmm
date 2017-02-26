@@ -60,12 +60,11 @@ module.exports.connections = {
 
   heroku_settings : {
       adapter: 'sails-mysql',
-      host:'eu-cdbr-west-01.cleardb.com',
-      user:'be4e37b21056a1',
-      password:'4f59d7c4',
-      database:'heroku_5d47f2724a596fd'
+      host:'us-cdbr-iron-east-04.cleardb.net',
+      user:'b8647eddf000eb',
+      password:'2fa04c58',
+      database:'heroku_b75a547a6138968'
   },
-
   /***************************************************************************
   *                                                                          *
   * MongoDB is the leading NoSQL database.                                   *
