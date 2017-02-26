@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         'sails-linker:devTplJade'
     ]);
 
-    /*
+
     grunt.registerTask('prod', [
         'compileAssets',
         'concat',
@@ -39,5 +39,5 @@ module.exports = function(grunt) {
         'sails-linker:prodStylesJade',
         'sails-linker:devTplJade'
     ]);
-    */
+    
 };
