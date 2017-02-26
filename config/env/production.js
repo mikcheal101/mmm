@@ -21,5 +21,7 @@ module.exports = {
     models: {
         connection: 'heroku_settings'
     },
-    hookTimeout: 120000
+    hookTimeout: 120000,
+    port: process.env.PORT || 1337,
+    enviroment: process.env.NODE_ENV || 'production',
 };
